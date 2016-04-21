@@ -1,17 +1,17 @@
-var path = require('path');
-var webpack = require('webpack');
+var path = require('path');  //check we have this module
+var webpack = require('webpack');  //check we have this module
 
-module.exports = {
+module.exports = {  //export so you can use this elswhere
   entry: {
     app : [
       './lib/index.js'],
   },
   output: {
-    path: path.join(__dirname, './public/js/'),
+    path: path.join(__dirname, './public/js/'),  //output path
     filename: `app.js`,
     publicPath: '/js/'
   },
-  plugins: [
+  plugins: [  //plugins
     new webpack.DefinePlugin({
         'process.env': {
           'NODE_ENV': JSON.stringify('production')
@@ -21,37 +21,37 @@ module.exports = {
     }),
   ],
   node: {
-    fs: "empty"
+    fs: "empty"  // fileSystem module set to empty
   },
-  resolve: {
+  resolve: { 
     alias: {
-      'react': path.join(__dirname, 'node_modules', 'react')
+      'react': path.join(__dirname, 'node_modules', 'react')  // join path to react to the alias
     },
-    extensions: ['', '.js']
+    extensions: ['', '.js']  // javascript
   },
   resolveLoader: {
-    'fallback': path.join(__dirname, 'node_modules')
+    'fallback': path.join(__dirname, 'node_modules')  // path for loaders if things go bad
   },
-  module: {
+  module: {    
     loaders: [
     {
-      test: /\.js$/,
-      loaders: ['react-hot', 'babel'],
-      exclude: /node_modules/,
-      include: [path.join(__dirname,'./lib')]
+      test: /\.js$/,  // test js thing
+      loaders: ['react-hot', 'babel'],  // use babel & react-hot to load js files
+      exclude: /node_modules/,  // don't load node_modules
+      include: [path.join(__dirname,'./lib')]  // include this dir
     },
     {
-      test: /\.xml$/,
-      loader: "raw"
+      test: /\.xml$/,  // test xml thing
+      loader: "raw"  // use raw loader
     },
     {
-      test: /\.json$/,
-      loaders: ['json-loader']
+      test: /\.json$/,  // test JSON thing
+      loaders: ['json-loader']  // use json loader
     },
     {
-      test: /\.css?$/,
-      loaders: ['style', 'raw'],
-      include: __dirname
+      test: /\.css?$/,  // check css file
+      loaders: ['style', 'raw'],  // use raw loader
+      include: __dirname  // include default directory
     }]
   }
 };
